@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luca Varotto — Scienze Statistiche</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy:       #0f2241;
+      --navy-mid:   #1a3560;
+      --accent:     #2d6ae0;
+      --accent-lt:  #4f87f5;
+      --sand:       #f5f3ef;
+      --muted:      #8a9bb5;
+      --text:       #1c2b45;
+      --white:      #ffffff;
+      --card-bg:    #ffffff;
+      --border:     #dde4f0;
+      --radius:     14px;
+      --shadow-sm:  0 2px 12px rgba(15,34,65,.07);
+      --shadow-md:  0 6px 28px rgba(15,34,65,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--sand);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+      padding: 64px 24px 80px;
+    }
+
+    /* ── DECORATIVE LINE ── */
+    .rule {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-lt));
+      border-radius: 2px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp .6s .1s ease forwards;
+    }
+
+    /* ── HEADER ── */
+    header {
+      margin-bottom: 48px;
+    }
+
+    .name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 7vw, 3.6rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      opacity: 0;
+      animation: fadeUp .7s .05s ease forwards;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp .7s .15s ease forwards;
+    }
+
+    /* ── BIO CARD ── */
+    .bio-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp .7s .25s ease forwards;
+    }
+
+    .bio-label {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .bio-text {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    .bio-text strong {
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    /* ── CTA GRID ── */
+    .cta-label {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp .7s .35s ease forwards;
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeUp .7s .4s ease forwards;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-size: .93rem;
+      font-weight: 500;
+      letter-spacing: .01em;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+    }
+
+    .btn .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: background .18s;
+    }
+
+    .btn-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .btn-title {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .btn-desc {
+      font-size: .75rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* LinkedIn */
+    .btn-linkedin {
+      background: var(--white);
+      border-color: var(--border);
+    }
+    .btn-linkedin .icon {
+      background: #e8f0fe;
+      color: #0a66c2;
+    }
+    .btn-linkedin:hover { border-color: #0a66c2; }
+    .btn-linkedin:hover .icon { background: #0a66c2; color: #fff; }
+
+    /* CV */
+    .btn-cv {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .btn-cv .icon {
+      background: rgba(255,255,255,.12);
+      color: #fff;
+    }
+    .btn-cv .btn-title { color: #fff; }
+    .btn-cv .btn-desc { color: rgba(255,255,255,.55); }
+    .btn-cv:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
+
+    /* Email */
+    .btn-email {
+      background: var(--white);
+      border-color: var(--border);
+    }
+    .btn-email .icon {
+      background: #fef3e2;
+      color: #e07b1a;
+    }
+    .btn-email:hover { border-color: #e07b1a; }
+    .btn-email:hover .icon { background: #e07b1a; color: #fff; }
+
+    /* GitHub */
+    .btn-github {
+      background: var(--white);
+      border-color: var(--border);
+    }
+    .btn-github .icon {
+      background: #f0f0f0;
+      color: #24292e;
+    }
+    .btn-github:hover { border-color: #24292e; }
+    .btn-github:hover .icon { background: #24292e; color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 56px;
+      text-align: center;
+      font-size: .78rem;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp .7s .55s ease forwards;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+      .bio-card {
+        padding: 22px 20px;
+      }
+      .page {
+        padding: 48px 18px 64px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <h1 class="name">Luca Varotto</h1>
+      <p class="subtitle">Studente di Scienze Statistiche</p>
+    </header>
+
+    <div class="rule"></div>
+
+    <section class="bio-card" aria-label="Biografia">
+      <p class="bio-label">Chi sono</p>
+      <p class="bio-text">
+        Sto completando la <strong>laurea magistrale in Scienze Statistiche</strong> presso
+        l'<strong>Università di Padova</strong>, con una forte passione per l'analisi dei dati
+        applicata al mondo dello sport. Mi interessano in particolare la modellazione statistica
+        delle performance atletiche, la visualizzazione dei dati e lo sviluppo di strumenti
+        quantitativi per supportare decisioni in ambito sportivo. Cerco opportunità dove unire
+        rigore metodologico e curiosità per i fenomeni sportivi.
+      </p>
+    </section>
+
+    <p class="cta-label">Contatti &amp; Risorse</p>
+
+    <div class="cta-grid">
+
+      <a class="btn btn-linkedin"
+         href="https://www.linkedin.com/in/luca-varotto-97614226b/"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Profilo LinkedIn di Luca Varotto">
+        <span class="icon"><i class="fa-brands fa-linkedin-in"></i></span>
+        <span class="btn-info">
+          <span class="btn-title">LinkedIn</span>
+          <span class="btn-desc">Profilo professionale</span>
+        </span>
+      </a>
+
+      <a class="btn btn-cv"
+         href="./Files/VarottoLucaCV.pdf"
+         download
+         aria-label="Scarica il CV di Luca Varotto">
+        <span class="icon"><i class="fa-regular fa-file-pdf"></i></span>
+        <span class="btn-info">
+          <span class="btn-title">Curriculum Vitæ</span>
+          <span class="btn-desc">Scarica il PDF</span>
+        </span>
+      </a>
+
+      <a class="btn btn-email"
+         href="mailto:lc.varotto@gmail.com"
+         aria-label="Invia email a Luca Varotto">
+        <span class="icon"><i class="fa-regular fa-envelope"></i></span>
+        <span class="btn-info">
+          <span class="btn-title">Email</span>
+          <span class="btn-desc">Scrivimi</span>
+        </span>
+      </a>
+
+      <a class="btn btn-github"
+         href="https://github.com/lucavarotto"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Profilo GitHub di Luca Varotto">
+        <span class="icon"><i class="fa-brands fa-github"></i></span>
+        <span class="btn-info">
+          <span class="btn-title">GitHub</span>
+          <span class="btn-desc">Progetti e codice</span>
+        </span>
+      </a>
+
+    </div>
+
+    <footer>
+      <p>© 2026 Luca Varotto &nbsp;·&nbsp; Padova, Italia</p>
+    </footer>
+
+  </div>
+</body>
+</html>
