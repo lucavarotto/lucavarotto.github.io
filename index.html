@@ -115,7 +115,7 @@
       border-radius: var(--radius);
       padding: 28px 32px;
       box-shadow: var(--shadow-sm);
-      margin-bottom: 40px;
+      margin-bottom: 48px;
       opacity: 0;
       animation: fadeUp .7s .25s ease forwards;
     }
@@ -148,6 +148,7 @@
       letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--muted);
+      margin-top: 48px;
       margin-bottom: 16px;
       opacity: 0;
       animation: fadeUp .7s .32s ease forwards;
@@ -159,7 +160,7 @@
       border-radius: var(--radius);
       padding: 28px 32px;
       box-shadow: var(--shadow-sm);
-      margin-bottom: 40px;
+      margin-bottom: 48px;
       opacity: 0;
       animation: fadeUp .7s .36s ease forwards;
     }
@@ -210,6 +211,18 @@
     .project-title em {
       font-style: normal;
       color: var(--accent);
+    }
+
+    /* Stile per i link interni ai titoli dei progetti */
+    .project-title em a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color .18s ease;
+    }
+
+    .project-title em a:hover {
+      color: var(--accent-lt);
+      text-decoration: underline;
     }
 
     .project-desc {
@@ -269,6 +282,7 @@
       letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--muted);
+      margin-top: 8px;
       margin-bottom: 16px;
       opacity: 0;
       animation: fadeUp .7s .42s ease forwards;
@@ -278,6 +292,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      margin-bottom: 48px;
       opacity: 0;
       animation: fadeUp .7s .46s ease forwards;
     }
@@ -365,7 +380,7 @@
 
     /* ── FOOTER ── */
     footer {
-      margin-top: 56px;
+      margin-top: 16px;
       text-align: center;
       font-size: .78rem;
       color: var(--muted);
@@ -410,7 +425,7 @@
       <div class="bio-text">
         <p>
           Sto frequentando l'ultimo semestre della <strong>Magistrale in Scienze Statistiche</strong> presso
-          UniPd, dove mi sto dedicando alla modellazione statistica e al machine learning.
+          l'Università degli Studi di Padova, dove mi sto dedicando alla modellazione statistica e al machine learning.
         </p>
         <p style="margin-top: 12px;">
           Mi interessa in particolare la modellazione statistica applicata al calcio. Nella tesi triennale
