@@ -141,6 +141,127 @@
       color: var(--navy);
     }
 
+    /* ── PROJECTS SECTION ── */
+    .projects-label {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp .7s .32s ease forwards;
+    }
+
+    .projects-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp .7s .36s ease forwards;
+    }
+
+    .projects-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .projects-list li {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .projects-list li:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .projects-list li:first-of-type {
+      padding-top: 0;
+    }
+
+    .project-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-lt));
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .project-body {
+      flex: 1;
+    }
+
+    .project-title {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .project-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .project-desc {
+      font-size: .875rem;
+      line-height: 1.65;
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    .project-desc strong {
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    /* GitHub link inside projects card */
+    .github-inline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .84rem;
+      font-weight: 400;
+      transition: color .18s ease;
+    }
+
+    .github-inline:hover {
+      color: var(--navy);
+    }
+
+    .github-inline .github-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      color: #24292e;
+      flex-shrink: 0;
+      transition: background .18s ease, color .18s ease;
+    }
+
+    .github-inline:hover .github-icon {
+      background: #24292e;
+      color: #fff;
+    }
+
     /* ── CTA GRID ── */
     .cta-label {
       font-size: .72rem;
@@ -150,7 +271,7 @@
       color: var(--muted);
       margin-bottom: 16px;
       opacity: 0;
-      animation: fadeUp .7s .35s ease forwards;
+      animation: fadeUp .7s .42s ease forwards;
     }
 
     .cta-grid {
@@ -158,7 +279,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       opacity: 0;
-      animation: fadeUp .7s .4s ease forwards;
+      animation: fadeUp .7s .46s ease forwards;
     }
 
     .btn {
@@ -242,15 +363,6 @@
     .btn-email:hover { border-color: #e07b1a; }
     .btn-email:hover .icon { background: #e07b1a; color: #fff; }
 
-    /* GitHub */
-    .btn-github {
-      background: var(--white);
-      border-color: var(--border);
-    }
-    .btn-github .icon { background: #f0f0f0; color: #24292e; }
-    .btn-github:hover { border-color: #24292e; }
-    .btn-github:hover .icon { background: #24292e; color: #fff; }
-
     /* ── FOOTER ── */
     footer {
       margin-top: 56px;
@@ -258,7 +370,7 @@
       font-size: .78rem;
       color: var(--muted);
       opacity: 0;
-      animation: fadeUp .7s .55s ease forwards;
+      animation: fadeUp .7s .6s ease forwards;
     }
 
     /* ── ANIMATIONS ── */
@@ -272,7 +384,8 @@
       .cta-grid {
         grid-template-columns: 1fr;
       }
-      .bio-card {
+      .bio-card,
+      .projects-card {
         padding: 22px 20px;
       }
       .page {
@@ -291,6 +404,7 @@
 
     <div class="rule"></div>
 
+    <!-- ── BIO ── -->
     <section class="bio-card" aria-label="Biografia">
       <p class="bio-label">Chi sono</p>
       <div class="bio-text">
@@ -305,6 +419,7 @@
       </div>
     </section>
 
+    <!-- ── CONTATTI & RISORSE ── -->
     <p class="cta-label">Contatti &amp; Risorse</p>
 
     <div class="cta-grid">
@@ -320,18 +435,6 @@
         </span>
       </a>
 
-      <a class="btn btn-cv"
-         href="./assets/VarottoLucaCV.pdf"
-         download
-         aria-label="Scarica il CV di Luca Varotto"
-         target="_blank">
-        <span class="icon"><i class="fa-regular fa-file-pdf"></i></span>
-        <span class="btn-info">
-          <span class="btn-title">Curriculum Vitæ</span>
-          <span class="btn-desc">Scarica il PDF</span>
-        </span>
-      </a>
-
       <a class="btn btn-email"
          href="mailto:lc.varotto@gmail.com"
          aria-label="Invia email a Luca Varotto">
@@ -342,18 +445,95 @@
         </span>
       </a>
 
-      <a class="btn btn-github"
-         href="https://github.com/lucavarotto"
-         target="_blank" rel="noopener noreferrer"
-         aria-label="Profilo GitHub di Luca Varotto">
-        <span class="icon"><i class="fa-brands fa-github"></i></span>
+      <a class="btn btn-cv"
+         href="./assets/VarottoLuca_CV-it.pdf"
+         download
+         aria-label="Scarica il mio CV"
+         target="_blank">
+        <span class="icon"><i class="fa-regular fa-file-pdf"></i></span>
         <span class="btn-info">
-          <span class="btn-title">GitHub</span>
-          <span class="btn-desc">I miei progetti</span>
+          <span class="btn-title">Curriculum Vitæ (IT)</span>
+          <span class="btn-desc">Scarica il PDF</span>
+        </span>
+      </a>
+
+      <a class="btn btn-cv"
+         href="./assets/VarottoLuca_CV-eng.pdf"
+         download
+         aria-label="Download my CV"
+         target="_blank">
+        <span class="icon"><i class="fa-regular fa-file-pdf"></i></span>
+        <span class="btn-info">
+          <span class="btn-title">Curriculum Vitæ (ENG)</span>
+          <span class="btn-desc">Download the PDF</span>
         </span>
       </a>
 
     </div>
+
+    <!-- ── PROGETTI ── -->
+    <p class="projects-label">Progetti</p>
+
+    <section class="projects-card" aria-label="Progetti">
+      <ul class="projects-list">
+
+        <li>
+          <span class="project-dot"></span>
+          <div class="project-body">
+            <p class="project-title">Academic Classifier &mdash; <em><a href="https://github.com/lucavarotto/Text_mining_unipd_courses" target="_blank" rel="noopener noreferrer">NLP e IA sull'Ateneo di Padova</a></em></p>
+            <p class="project-desc">
+              Attività di <strong>web scraping</strong> dei siti universitari, pulizia dei dati e addestramento
+              di modelli di IA per prevedere la scuola di appartenenza di ogni corso partendo dalla descrizione
+              testuale (<strong>NLP</strong> / classificazione).
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span class="project-dot"></span>
+          <div class="project-body">
+            <p class="project-title">Next-Gen Search &mdash; <em><a href="https://github.com/lucavarotto/cluster_based_relevance_feedback" target="_blank" rel="noopener noreferrer">Ottimizzazione di BM25 tramite Clustering e k-NN</a></em></p>
+            <p class="project-desc">
+              Sviluppo di un'architettura per il <strong>recupero dell'informazione</strong> utilizzando un
+              approccio ibrido di <strong>clustering</strong> e algoritmo <strong>k-NN</strong>.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span class="project-dot"></span>
+          <div class="project-body">
+            <p class="project-title">Bio-Analytics &mdash; <em><a href="https://github.com/lucavarotto/BiomassProduction" target="_blank" rel="noopener noreferrer">Modellazione della Crescita di Cianobatteri (Nostoc)</a></em></p>
+            <p class="project-desc">
+              Analisi statistica di dati sperimentali sulla produzione di biomassa. Studio dell'influenza dei
+              fattori di coltivazione sulla crescita biologica monitorata tramite
+              <strong>densità ottica (OD)</strong>.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span class="project-dot"></span>
+          <div class="project-body">
+            <p class="project-title">Vinted Market Intelligence &mdash; <em><a href="https://github.com/lucavarotto/vinted-scraper-and-business-analysis" target="_blank" rel="noopener noreferrer">Web Scraping &amp; Business Analytics</a></em></p>
+            <p class="project-desc">
+              Estrazione automatizzata di dati dalla piattaforma Vinted tramite tecniche di
+              <strong>web scraping</strong> e implementazione di modelli di IA per condurre
+              <strong>analisi di business</strong>.
+            </p>
+          </div>
+        </li>
+
+      </ul>
+
+      <a class="github-inline"
+         href="https://github.com/lucavarotto"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Profilo GitHub di Luca Varotto">
+        <span class="github-icon"><i class="fa-brands fa-github"></i></span>
+        <span>Tutti i progetti su <strong>GitHub</strong></span>
+      </a>
+    </section>
 
     <footer>
       <p>© 2026 Luca Varotto &nbsp;·&nbsp; Padova, Italia</p>

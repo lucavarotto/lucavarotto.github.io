@@ -5,6 +5,7 @@ L'attuale organizzazione dei file è la seguente:
 - **README.md**: Questo file
 - **assets/**: Risorse del sito
     - **SL.jpg**: Foto di anteprima
-    - **VarottoLucaCV.pdf**: Curriculum Vitae aggiornato
+    - **VarottoLuca_CV-it.pdf**: Curriculum Vitae in italiano aggiornato
+    - **VarottoLuca_CV-eng.pdf**: Curriculum Vitae in inglese aggiornato
 
 **Sito Live:** [lucavarotto.github.io](https://lucavarotto.github.io/)
