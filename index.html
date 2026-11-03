@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="description" content="Luca Varotto - Studente Magistrale in Scienze Statistiche a Padova. Appassionato di Statistica Sportiva e Data Science.">
-  <meta name="keywords" content="Luca Varotto, Statistica, Padova, Sport Analytics, Data Scientist">
+  <meta name="description" content="Luca Varotto - Data Scientist, laureando magistrale in Scienze Statistiche e Professore a contratto all'Università di Padova. Machine Learning, Sport Analytics e Data Science.">
+  <meta name="keywords" content="Luca Varotto, Statistica, Padova, Sport Analytics, Data Scientist, Machine Learning, Professore a contratto">
 
   <meta property="og:title" content="Luca Varotto — Data Scientist">
-  <meta property="og:description" content="Analisi statistica applicata allo sport e Data Science.">
+  <meta property="og:description" content="Data Scientist e Professore a contratto all'Università di Padova. Machine Learning, statistica e sport analytics.">
   <meta property="og:image" content="https://lucavarotto.github.io/assets/SL.jpg">
 
   <title>Luca Varotto — Data Scientist</title>
@@ -28,12 +28,14 @@
       --navy-mid:   #1a3560;
       --accent:     #2d6ae0;
       --accent-lt:  #4f87f5;
+      --accent-bg:  #eaf1fd;
       --sand:       #f5f3ef;
       --muted:      #8a9bb5;
       --text:       #1c2b45;
       --white:      #ffffff;
       --card-bg:    #ffffff;
       --border:     #dde4f0;
+      --green:      #1f9d61;
       --radius:     14px;
       --shadow-sm:  0 2px 12px rgba(15,34,65,.07);
       --shadow-md:  0 6px 28px rgba(15,34,65,.12);
@@ -49,7 +51,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow-x: hidden;
     }
+
+    ::selection { background: var(--accent); color: #fff; }
 
     /* ── NOISE OVERLAY ── */
     body::before {
@@ -61,13 +66,123 @@
       z-index: 0;
     }
 
+    /* ── SOFT BACKGROUND GLOWS ── */
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: .45;
+    }
+    .glow-1 {
+      width: 420px; height: 420px;
+      top: -140px; right: -120px;
+      background: radial-gradient(circle, #c9dbfb 0%, transparent 70%);
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .glow-2 {
+      width: 360px; height: 360px;
+      bottom: -120px; left: -120px;
+      background: radial-gradient(circle, #e7dccb 0%, transparent 70%);
+      animation: drift 22s ease-in-out infinite alternate-reverse;
+    }
+
     /* ── PAGE WRAPPER ── */
     .page {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 680px;
-      padding: 64px 24px 80px;
+      max-width: 720px;
+      padding: 72px 24px 80px;
+    }
+
+    /* ── HEADER ── */
+    header { margin-bottom: 28px; }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px 6px 10px;
+      border-radius: 999px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      font-size: .74rem;
+      font-weight: 500;
+      color: var(--navy);
+      letter-spacing: .02em;
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: fadeUp .6s 0s ease forwards;
+    }
+
+    .status-dot {
+      position: relative;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    .status-dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--green);
+      animation: ping 1.8s cubic-bezier(0,0,.2,1) infinite;
+    }
+
+    .name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 8vw, 4rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      opacity: 0;
+      animation: fadeUp .7s .05s ease forwards;
+    }
+
+    .name .dot { color: var(--accent); }
+
+    .subtitle {
+      margin-top: 12px;
+      font-size: .95rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp .7s .15s ease forwards;
+    }
+
+    .subtitle .sep { color: var(--accent); margin: 0 6px; }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeUp .7s .2s ease forwards;
+    }
+
+    .socials a {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--navy);
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+    }
+    .socials a:hover {
+      transform: translateY(-2px);
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
     }
 
     /* ── DECORATIVE LINE ── */
@@ -76,48 +191,53 @@
       height: 3px;
       background: linear-gradient(90deg, var(--accent), var(--accent-lt));
       border-radius: 2px;
-      margin-bottom: 28px;
+      margin: 32px 0 28px;
       opacity: 0;
-      animation: fadeUp .6s .1s ease forwards;
+      animation: fadeUp .6s .25s ease forwards;
     }
 
-    /* ── HEADER ── */
-    header {
-      margin-bottom: 48px;
-    }
-
-    .name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 7vw, 3.6rem);
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1.1;
-      letter-spacing: -.02em;
-      opacity: 0;
-      animation: fadeUp .7s .05s ease forwards;
-    }
-
-    .subtitle {
-      margin-top: 10px;
-      font-size: 1rem;
-      font-weight: 400;
-      color: var(--muted);
-      letter-spacing: .04em;
+    /* ── SECTION LABELS ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .1em;
       text-transform: uppercase;
-      opacity: 0;
-      animation: fadeUp .7s .15s ease forwards;
+      color: var(--muted);
+      margin-top: 48px;
+      margin-bottom: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
     }
 
-    /* ── BIO CARD ── */
-    .bio-card {
+    /* ── GENERIC CARD ── */
+    .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 28px 32px;
       box-shadow: var(--shadow-sm);
-      margin-bottom: 48px;
-      opacity: 0;
-      animation: fadeUp .7s .25s ease forwards;
+      transition: box-shadow .25s ease, border-color .25s ease;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #cdd8ec;
+    }
+
+    /* ── BIO CARD ── */
+    .bio-card { position: relative; overflow: hidden; }
+    .bio-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-lt));
     }
 
     .bio-label {
@@ -135,42 +255,115 @@
       color: var(--text);
       font-weight: 300;
     }
+    .bio-text p + p { margin-top: 12px; }
+    .bio-text strong { font-weight: 500; color: var(--navy); }
 
-    .bio-text strong {
+    /* ── HIGHLIGHTS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .stat {
+      padding: 20px 18px;
+      text-align: left;
+    }
+    .stat-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-bg);
+      color: var(--accent);
+      font-size: .85rem;
+      margin-bottom: 12px;
+    }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+    .stat-desc {
+      margin-top: 4px;
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      list-style: none;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--border));
+      border-radius: 2px;
+    }
+    .timeline li {
+      position: relative;
+      padding-left: 30px;
+    }
+    .timeline li + li { margin-top: 24px; }
+    .timeline li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--accent);
+    }
+    .timeline li.current::before {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-bg);
+    }
+    .tl-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .tl-role {
+      font-size: .98rem;
       font-weight: 500;
       color: var(--navy);
     }
-
-    /* ── PROJECTS SECTION ── */
-    .projects-label {
-      font-size: .72rem;
+    .tl-date {
+      font-size: .74rem;
       font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-bg);
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .tl-org {
+      font-size: .84rem;
       color: var(--muted);
-      margin-top: 48px;
-      margin-bottom: 16px;
-      opacity: 0;
-      animation: fadeUp .7s .32s ease forwards;
+      margin-top: 2px;
     }
-
-    .projects-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 48px;
-      opacity: 0;
-      animation: fadeUp .7s .36s ease forwards;
+    .tl-desc {
+      margin-top: 8px;
+      font-size: .875rem;
+      line-height: 1.65;
+      font-weight: 300;
     }
+    .tl-desc strong { font-weight: 500; color: var(--navy); }
 
+    /* ── PROJECTS ── */
     .projects-list {
       list-style: none;
       padding: 0;
       margin: 0;
     }
-
     .projects-list li {
       padding: 16px 0;
       border-bottom: 1px solid var(--border);
@@ -178,15 +371,8 @@
       gap: 14px;
       align-items: flex-start;
     }
-
-    .projects-list li:last-of-type {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .projects-list li:first-of-type {
-      padding-top: 0;
-    }
+    .projects-list li:last-of-type { border-bottom: none; padding-bottom: 0; }
+    .projects-list li:first-of-type { padding-top: 0; }
 
     .project-dot {
       width: 8px;
@@ -195,11 +381,11 @@
       background: linear-gradient(135deg, var(--accent), var(--accent-lt));
       flex-shrink: 0;
       margin-top: 7px;
+      transition: transform .2s ease;
     }
+    .projects-list li:hover .project-dot { transform: scale(1.6); }
 
-    .project-body {
-      flex: 1;
-    }
+    .project-body { flex: 1; }
 
     .project-title {
       font-size: .95rem;
@@ -207,23 +393,18 @@
       color: var(--navy);
       margin-bottom: 4px;
     }
-
-    .project-title em {
-      font-style: normal;
-      color: var(--accent);
-    }
-
-    /* Stile per i link interni ai titoli dei progetti */
+    .project-title em { font-style: normal; color: var(--accent); }
     .project-title em a {
       color: var(--accent);
       text-decoration: none;
-      transition: color .18s ease;
+      background-image: linear-gradient(var(--accent-lt), var(--accent-lt));
+      background-size: 0 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: color .18s ease, background-size .25s ease;
     }
-
-    .project-title em a:hover {
-      color: var(--accent-lt);
-      text-decoration: underline;
-    }
+    .project-title em a:hover { color: var(--accent-lt); background-size: 100% 1px; }
+    .project-title em a i { font-size: .7rem; margin-left: 4px; }
 
     .project-desc {
       font-size: .875rem;
@@ -231,13 +412,24 @@
       color: var(--text);
       font-weight: 300;
     }
+    .project-desc strong { font-weight: 500; color: var(--navy); }
 
-    .project-desc strong {
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .tag {
+      font-size: .7rem;
       font-weight: 500;
-      color: var(--navy);
+      color: var(--navy-mid);
+      background: var(--sand);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 6px;
     }
 
-    /* GitHub link inside projects card */
     .github-inline {
       display: flex;
       align-items: center;
@@ -251,11 +443,7 @@
       font-weight: 400;
       transition: color .18s ease;
     }
-
-    .github-inline:hover {
-      color: var(--navy);
-    }
-
+    .github-inline:hover { color: var(--navy); }
     .github-inline .github-icon {
       width: 30px;
       height: 30px;
@@ -269,32 +457,37 @@
       flex-shrink: 0;
       transition: background .18s ease, color .18s ease;
     }
+    .github-inline:hover .github-icon { background: #24292e; color: #fff; }
+    .github-inline .arrow { margin-left: auto; transition: transform .18s ease; }
+    .github-inline:hover .arrow { transform: translateX(4px); }
 
-    .github-inline:hover .github-icon {
-      background: #24292e;
-      color: #fff;
-    }
-
-    /* ── CTA GRID ── */
-    .cta-label {
+    /* ── SKILLS ── */
+    .skill-group + .skill-group { margin-top: 18px; }
+    .skill-title {
       font-size: .72rem;
       font-weight: 500;
-      letter-spacing: .1em;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 8px;
-      margin-bottom: 16px;
-      opacity: 0;
-      animation: fadeUp .7s .42s ease forwards;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: .82rem;
+      color: var(--navy);
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: border-color .18s ease, background .18s ease, color .18s ease;
+    }
+    .chip:hover { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
 
+    /* ── CTA GRID ── */
     .cta-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 48px;
-      opacity: 0;
-      animation: fadeUp .7s .46s ease forwards;
     }
 
     .btn {
@@ -307,18 +500,12 @@
       font-size: .93rem;
       font-weight: 500;
       letter-spacing: .01em;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-      border: 1px solid transparent;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+      border: 1px solid var(--border);
+      background: var(--white);
     }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn:active {
-      transform: translateY(-1px);
-    }
+    .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .btn:active { transform: translateY(-1px); }
 
     .btn .icon {
       width: 36px;
@@ -329,116 +516,296 @@
       justify-content: center;
       font-size: 1rem;
       flex-shrink: 0;
-      transition: background .18s;
+      transition: background .18s, color .18s;
     }
+    .btn-info { display: flex; flex-direction: column; gap: 2px; }
+    .btn-title { font-size: .9rem; font-weight: 500; color: var(--navy); }
+    .btn-desc { font-size: .75rem; color: var(--muted); font-weight: 400; }
 
-    .btn-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .btn-title {
-      font-size: .9rem;
-      font-weight: 500;
-      color: var(--navy);
-    }
-
-    .btn-desc {
-      font-size: .75rem;
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    /* LinkedIn */
-    .btn-linkedin {
-      background: var(--white);
-      border-color: var(--border);
-    }
     .btn-linkedin .icon { background: #e8f0fe; color: #0a66c2; }
     .btn-linkedin:hover { border-color: #0a66c2; }
     .btn-linkedin:hover .icon { background: #0a66c2; color: #fff; }
-
-    /* CV */
-    .btn-cv {
-      background: var(--white);
-      border-color: var(--border);
-    }
 
     .btn-cv .icon { background: #fdecea; color: #d32f2f; }
     .btn-cv:hover { border-color: #d32f2f; }
     .btn-cv:hover .icon { background: #d32f2f; color: #fff; }
 
-    /* Email */
-    .btn-email {
-      background: var(--white);
-      border-color: var(--border);
-    }
     .btn-email .icon { background: #fef3e2; color: #e07b1a; }
     .btn-email:hover { border-color: #e07b1a; }
     .btn-email:hover .icon { background: #e07b1a; color: #fff; }
 
     /* ── FOOTER ── */
     footer {
-      margin-top: 16px;
+      margin-top: 56px;
       text-align: center;
       font-size: .78rem;
       color: var(--muted);
-      opacity: 0;
-      animation: fadeUp .7s .6s ease forwards;
     }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      animation: fadeUp .7s ease forwards;
+      animation-delay: var(--d, .3s);
+    }
+    .js .reveal {
+      animation: none;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s ease;
+      transition-delay: var(--d-js, 0s);
+    }
+    .js .reveal.in { opacity: 1; transform: none; }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    @keyframes ping {
+      75%, 100% { transform: scale(2.4); opacity: 0; }
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(-40px, 30px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .name, .subtitle, .status, .socials, .rule, .reveal { opacity: 1 !important; transform: none !important; }
+    }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .stats { grid-template-columns: 1fr; }
+      .stat { display: flex; align-items: center; gap: 14px; padding: 16px 18px; }
+      .stat-icon { margin-bottom: 0; flex-shrink: 0; }
+    }
     @media (max-width: 480px) {
-      .cta-grid {
-        grid-template-columns: 1fr;
-      }
-      .bio-card,
-      .projects-card {
-        padding: 22px 20px;
-      }
-      .page {
-        padding: 48px 18px 64px;
-      }
+      .cta-grid { grid-template-columns: 1fr; }
+      .card { padding: 22px 20px; }
+      .page { padding: 48px 18px 64px; }
     }
   </style>
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+  <div class="glow glow-1" aria-hidden="true"></div>
+  <div class="glow glow-2" aria-hidden="true"></div>
+
   <div class="page">
 
     <header>
-      <h1 class="name">Luca Varotto</h1>
-      <p class="subtitle">Data Scientist</p>
+      <span class="status"><span class="status-dot"></span>Disponibile da subito</span>
+      <h1 class="name">Luca Varotto<span class="dot">.</span></h1>
+      <p class="subtitle">Data Scientist <span class="sep">·</span> Statistico <span class="sep">·</span> Docente UniPD</p>
+
+      <nav class="socials" aria-label="Profili">
+        <a href="https://www.linkedin.com/in/lucavarotto" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/lucavarotto" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:lc.varotto@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+      </nav>
     </header>
 
     <div class="rule"></div>
 
     <!-- ── BIO ── -->
-    <section class="bio-card" aria-label="Biografia">
+    <section class="card bio-card reveal" style="--d:.3s" aria-label="Biografia">
       <p class="bio-label">Chi sono</p>
       <div class="bio-text">
         <p>
-          Sto frequentando l'ultimo semestre della <strong>Magistrale in Scienze Statistiche</strong> presso
-          l'Università degli Studi di Padova, dove mi sto dedicando alla modellazione statistica e al machine learning.
+          Sono un <strong>Data Scientist</strong> in fase di conclusione della <strong>Magistrale in Scienze Statistiche</strong>
+          all'Università degli Studi di Padova, dove mi occupo di modellazione statistica e machine learning:
+          dalla raccolta dei dati fino a modelli predittivi e soluzioni basate su IA.
         </p>
-        <p style="margin-top: 12px;">
-          Mi interessa in particolare la modellazione statistica applicata al calcio. Nella tesi triennale
-          ho approfondito la modellazione degli <em>Expected Goals</em>, mentre in quella magistrale mi sono
-          occupato degli <em>Expected Threat</em>.
+        <p>
+          Nell'A.A. 2026/2027 sono <strong>Professore a contratto</strong> al Dipartimento di Scienze Economiche e Aziendali,
+          dove tengo in inglese il corso <strong>Laboratory: Informatics</strong> della Magistrale in
+          <em>Management for Sustainable Firms</em> per oltre 100 studenti. Spiegare i dati a chi non è tecnico
+          è la parte del lavoro che preferisco.
+        </p>
+        <p>
+          La mia passione è la statistica applicata al calcio: nella tesi triennale ho modellato gli
+          <em>Expected Goals</em>, in quella magistrale l'<em>Expected Threat</em>.
         </p>
       </div>
     </section>
 
-    <!-- ── CONTATTI & RISORSE ── -->
-    <p class="cta-label">Contatti &amp; Risorse</p>
+    <!-- ── HIGHLIGHTS ── -->
+    <div class="stats">
+      <div class="card stat reveal" style="--d:.38s">
+        <span class="stat-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+        <div>
+          <p class="stat-value">100+</p>
+          <p class="stat-desc">studenti nel mio corso universitario</p>
+        </div>
+      </div>
+      <div class="card stat reveal" style="--d:.44s; --d-js:.08s">
+        <span class="stat-icon"><i class="fa-solid fa-trophy"></i></span>
+        <div>
+          <p class="stat-value">1° posto</p>
+          <p class="stat-desc">Stat Data Camp 2026</p>
+        </div>
+      </div>
+      <div class="card stat reveal" style="--d:.5s; --d-js:.16s">
+        <span class="stat-icon"><i class="fa-solid fa-code"></i></span>
+        <div>
+          <p class="stat-value">Python · R</p>
+          <p class="stat-desc">e SQL per ML, analisi e forecasting</p>
+        </div>
+      </div>
+    </div>
 
-    <div class="cta-grid">
+    <!-- ── ESPERIENZE ── -->
+    <p class="section-label reveal" style="--d:.55s">Esperienze &amp; Formazione</p>
+
+    <section class="card reveal" style="--d:.6s" aria-label="Esperienze e formazione">
+      <ol class="timeline">
+        <li class="current">
+          <div class="tl-head">
+            <p class="tl-role">Professore a contratto</p>
+            <span class="tl-date">A.A. 2026/27</span>
+          </div>
+          <p class="tl-org">Dip. di Scienze Economiche e Aziendali · UniPD</p>
+          <p class="tl-desc">
+            Titolare del corso <strong>Laboratory: Informatics</strong> (Magistrale in Management for Sustainable Firms),
+            in inglese, per oltre 100 studenti: Excel per l'analisi di dati aziendali, grafici e dashboard.
+            Gestisco anche le prove d'esame.
+          </p>
+        </li>
+        <li class="current">
+          <div class="tl-head">
+            <p class="tl-role">Laurea Magistrale in Scienze Statistiche</p>
+            <span class="tl-date">2024 – 2026</span>
+          </div>
+          <p class="tl-org">Università degli Studi di Padova</p>
+          <p class="tl-desc">
+            <strong>1° posto allo Stat Data Camp 2026</strong>, hackathon a Cortina sponsorizzato da Geolander.it:
+            analisi end-to-end di dati complessi e presentazione delle soluzioni.
+          </p>
+        </li>
+        <li>
+          <div class="tl-head">
+            <p class="tl-role">Teaching Assistant &amp; Tutor</p>
+            <span class="tl-date">2025 – 2026</span>
+          </div>
+          <p class="tl-org">Università degli Studi di Padova</p>
+          <p class="tl-desc">
+            Tutorato e assistenza di laboratorio per <strong>Analisi Matematica</strong>,
+            <strong>Sistemi di Elaborazione I</strong> e <strong>Strutture Dati e Programmazione</strong>.
+          </p>
+        </li>
+        <li>
+          <div class="tl-head">
+            <p class="tl-role">Laurea Triennale in Statistica per le Tecnologie e le Scienze</p>
+            <span class="tl-date">2020 – 2024</span>
+          </div>
+          <p class="tl-org">Università degli Studi di Padova · 107/110</p>
+          <p class="tl-desc">
+            Tesi sui modelli di classificazione per gli <em>Expected Goals</em> e gli <em>Expected Points</em> nel calcio.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ── PROGETTI ── -->
+    <p class="section-label reveal">Progetti</p>
+
+    <section class="card reveal" aria-label="Progetti">
+      <ul class="projects-list">
+
+        <li>
+          <span class="project-dot"></span>
+          <div class="project-body">
+            <p class="project-title">Vinted Market Intelligence &mdash; <em><a href="https://github.com/lucavarotto/vinted-scraper-and-business-analysis" target="_blank" rel="noopener noreferrer">Web Scraping &amp; Business Analytics<i class="fa-solid fa-arrow-up-right-from-square"></i></a></em></p>
+            <p class="project-desc">
+              Estrazione automatizzata di dati dalla piattaforma Vinted tramite tecniche di
+              <strong>web scraping</strong> e implementazione di modelli di IA per condurre
+              <strong>analisi di business</strong>.
+            </p>
+            <div class="tags"><span class="tag">Web Scraping</span><span class="tag">IA</span><span class="tag">KPI</span></div>
+          </div>
+        </li>
+
+        <li>
+          <span class="project-dot"></span>
+          <div class="project-body">
+            <p class="project-title">Next-Gen Search &mdash; <em><a href="https://github.com/lucavarotto/cluster_based_relevance_feedback" target="_blank" rel="noopener noreferrer">Ottimizzazione di BM25 tramite Clustering e k-NN<i class="fa-solid fa-arrow-up-right-from-square"></i></a></em></p>
+            <p class="project-desc">
+              Sviluppo di un'architettura per il <strong>recupero dell'informazione</strong> utilizzando un
+              approccio ibrido di <strong>clustering</strong> e algoritmo <strong>k-NN</strong>.
+            </p>
+            <div class="tags"><span class="tag">Information Retrieval</span><span class="tag">BM25</span><span class="tag">Clustering</span></div>
+          </div>
+        </li>
+
+        <li>
+          <span class="project-dot"></span>
+          <div class="project-body">
+            <p class="project-title">Academic NLP Classifier &mdash; <em><a href="https://github.com/lucavarotto/Text_mining_unipd_courses" target="_blank" rel="noopener noreferrer">NLP e IA sull'Ateneo di Padova<i class="fa-solid fa-arrow-up-right-from-square"></i></a></em></p>
+            <p class="project-desc">
+              Attività di <strong>web scraping</strong> dei syllabus universitari, pulizia dei dati e addestramento
+              di modelli di IA per prevedere la scuola di appartenenza di ogni corso partendo dalla descrizione
+              testuale.
+            </p>
+            <div class="tags"><span class="tag">NLP</span><span class="tag">Text Mining</span><span class="tag">Classificazione</span></div>
+          </div>
+        </li>
+
+        <li>
+          <span class="project-dot"></span>
+          <div class="project-body">
+            <p class="project-title">Bio-Analytics &mdash; <em><a href="https://github.com/lucavarotto/BiomassProduction" target="_blank" rel="noopener noreferrer">Modellazione della Crescita di Cianobatteri (Nostoc)<i class="fa-solid fa-arrow-up-right-from-square"></i></a></em></p>
+            <p class="project-desc">
+              Analisi statistica di dati sperimentali sulla produzione di biomassa. Studio dell'influenza
+              dei fattori di coltivazione sulla crescita biologica.
+            </p>
+            <div class="tags"><span class="tag">Modelli Statistici</span><span class="tag">Dati Sperimentali</span></div>
+          </div>
+        </li>
+
+      </ul>
+
+      <a class="github-inline"
+         href="https://github.com/lucavarotto"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Profilo GitHub di Luca Varotto">
+        <span class="github-icon"><i class="fa-brands fa-github"></i></span>
+        <span>Tutti i progetti su <strong>GitHub</strong></span>
+        <i class="fa-solid fa-arrow-right arrow"></i>
+      </a>
+    </section>
+
+    <!-- ── COMPETENZE ── -->
+    <p class="section-label reveal">Competenze</p>
+
+    <section class="card reveal" aria-label="Competenze">
+      <div class="skill-group">
+        <p class="skill-title">Tecnologie</p>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL</span>
+          <span class="chip">Excel avanzato</span><span class="chip">Git / GitHub</span><span class="chip">AnyLogic</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-title">Metodi</p>
+        <div class="chips">
+          <span class="chip">Machine Learning</span><span class="chip">Inferenza Statistica</span><span class="chip">NLP</span>
+          <span class="chip">Serie Storiche &amp; Forecasting</span><span class="chip">Big Data</span>
+          <span class="chip">Web Scraping</span><span class="chip">Ottimizzazione</span><span class="chip">Sport Analytics</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-title">Lingue</p>
+        <div class="chips">
+          <span class="chip">Italiano · madrelingua</span><span class="chip">Inglese · B2, docenza in inglese</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONTATTI & RISORSE ── -->
+    <p class="section-label reveal">Contatti &amp; Risorse</p>
+
+    <div class="cta-grid reveal">
 
       <a class="btn btn-linkedin"
          href="https://www.linkedin.com/in/lucavarotto"
@@ -487,73 +854,26 @@
 
     </div>
 
-    <!-- ── PROGETTI ── -->
-    <p class="projects-label">Progetti</p>
-
-    <section class="projects-card" aria-label="Progetti">
-      <ul class="projects-list">
-
-                <li>
-          <span class="project-dot"></span>
-          <div class="project-body">
-            <p class="project-title">Bio-Analytics &mdash; <em><a href="https://github.com/lucavarotto/BiomassProduction" target="_blank" rel="noopener noreferrer">Modellazione della Crescita di Cianobatteri (Nostoc)</a></em></p>
-            <p class="project-desc">
-              Analisi statistica di dati sperimentali sulla produzione di biomassa. Studio dell'influenza
-              dei fattori di coltivazione sulla crescita biologica.
-            </p>
-          </div>
-        </li>
-
-        <li>
-          <span class="project-dot"></span>
-          <div class="project-body">
-            <p class="project-title">Vinted Market Intelligence &mdash; <em><a href="https://github.com/lucavarotto/vinted-scraper-and-business-analysis" target="_blank" rel="noopener noreferrer">Web Scraping &amp; Business Analytics</a></em></p>
-            <p class="project-desc">
-              Estrazione automatizzata di dati dalla piattaforma Vinted tramite tecniche di
-              <strong>web scraping</strong> e implementazione di modelli di IA per condurre
-              <strong>analisi di business</strong>.
-            </p>
-          </div>
-        </li>
-
-        <li>
-          <span class="project-dot"></span>
-          <div class="project-body">
-            <p class="project-title">Academic NLP Classifier &mdash; <em><a href="https://github.com/lucavarotto/Text_mining_unipd_courses" target="_blank" rel="noopener noreferrer">NLP e IA sull'Ateneo di Padova</a></em></p>
-            <p class="project-desc">
-              Attività di <strong>web scraping</strong> dei syllabus universitari, pulizia dei dati e addestramento
-              di modelli di IA per prevedere la scuola di appartenenza di ogni corso partendo dalla descrizione
-              testuale.
-            </p>
-          </div>
-        </li>
-
-        <li>
-          <span class="project-dot"></span>
-          <div class="project-body">
-            <p class="project-title">Next-Gen Search &mdash; <em><a href="https://github.com/lucavarotto/cluster_based_relevance_feedback" target="_blank" rel="noopener noreferrer">Ottimizzazione di BM25 tramite Clustering e k-NN</a></em></p>
-            <p class="project-desc">
-              Sviluppo di un'architettura per il <strong>recupero dell'informazione</strong> utilizzando un
-              approccio ibrido di <strong>clustering</strong> e algoritmo <strong>k-NN</strong>.
-            </p>
-          </div>
-        </li>
-
-      </ul>
-
-      <a class="github-inline"
-         href="https://github.com/lucavarotto"
-         target="_blank" rel="noopener noreferrer"
-         aria-label="Profilo GitHub di Luca Varotto">
-        <span class="github-icon"><i class="fa-brands fa-github"></i></span>
-        <span>Tutti i progetti su <strong>GitHub</strong></span>
-      </a>
-    </section>
-
-    <footer>
+    <footer class="reveal">
       <p>© 2026 Luca Varotto &nbsp;·&nbsp; Padova, Italia</p>
     </footer>
 
   </div>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
